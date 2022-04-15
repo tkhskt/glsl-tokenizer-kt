@@ -19,6 +19,8 @@ class TokenizerTest {
         get() = File(testResourcesPath, "fixture-windows.glsl").readText().excludeLicenseText()
     private val invalidChars
         get() = File(testResourcesPath, "invalid-chars.glsl").readText().excludeLicenseText()
+    private val blockComment
+        get() = File(testResourcesPath, "block-comment.glsl").readText()
 
     @Test
     fun token_generation_from_string() {
@@ -79,16 +81,52 @@ class TokenizerTest {
     fun floats_should_recognize_negative_exp() {
         Truth.assertThat(GlslTokenizer.tokenize("3.0e-2")).isEqualTo(
             listOf(
-                GlslToken(column = 6, data = "3.0e-2", line = 1, position = 0, type = GlslToken.Type.FLOAT),
-                GlslToken(column = 6, data = "(eof)", line = 1, position = 0, type = GlslToken.Type.EOF),
+                GlslToken(
+                    column = 6,
+                    data = "3.0e-2",
+                    line = 1,
+                    position = 0,
+                    type = GlslToken.Type.FLOAT
+                ),
+                GlslToken(
+                    column = 6,
+                    data = "(eof)",
+                    line = 1,
+                    position = 0,
+                    type = GlslToken.Type.EOF
+                ),
             )
         )
         Truth.assertThat(GlslTokenizer.tokenize("3.0-2.0")).isEqualTo(
             listOf(
-                GlslToken(type = GlslToken.Type.FLOAT, data = "3.0", position = 0, line = 1, column = 3),
-                GlslToken(type = GlslToken.Type.OPERATOR, data = "-", position = 3, line = 1, column = 4),
-                GlslToken(type = GlslToken.Type.FLOAT, data = "2.0", position = 4, line = 1, column = 7),
-                GlslToken(type = GlslToken.Type.EOF, data = "(eof)", position = 4, line = 1, column = 7),
+                GlslToken(
+                    type = GlslToken.Type.FLOAT,
+                    data = "3.0",
+                    position = 0,
+                    line = 1,
+                    column = 3
+                ),
+                GlslToken(
+                    type = GlslToken.Type.OPERATOR,
+                    data = "-",
+                    position = 3,
+                    line = 1,
+                    column = 4
+                ),
+                GlslToken(
+                    type = GlslToken.Type.FLOAT,
+                    data = "2.0",
+                    position = 4,
+                    line = 1,
+                    column = 7
+                ),
+                GlslToken(
+                    type = GlslToken.Type.EOF,
+                    data = "(eof)",
+                    position = 4,
+                    line = 1,
+                    column = 7
+                ),
             )
         )
     }
@@ -97,7 +135,13 @@ class TokenizerTest {
     fun uint_int_data_types() {
         Truth.assertThat(GlslTokenizer.tokenize("uint x;")).isEqualTo(
             listOf(
-                GlslToken(type = GlslToken.Type.KEYWORD, data = "uint", position = 0, line = 1, column = 4),
+                GlslToken(
+                    type = GlslToken.Type.KEYWORD,
+                    data = "uint",
+                    position = 0,
+                    line = 1,
+                    column = 4
+                ),
                 GlslToken(
                     type = GlslToken.Type.WHITESPACE,
                     data = " ",
@@ -105,14 +149,38 @@ class TokenizerTest {
                     line = 1,
                     column = 5
                 ),
-                GlslToken(type = GlslToken.Type.IDENTIFIER, data = "x", position = 5, line = 1, column = 6),
-                GlslToken(type = GlslToken.Type.OPERATOR, data = ";", position = 6, line = 1, column = 6),
-                GlslToken(type = GlslToken.Type.EOF, data = "(eof)", position = 6, line = 1, column = 7),
+                GlslToken(
+                    type = GlslToken.Type.IDENTIFIER,
+                    data = "x",
+                    position = 5,
+                    line = 1,
+                    column = 6
+                ),
+                GlslToken(
+                    type = GlslToken.Type.OPERATOR,
+                    data = ";",
+                    position = 6,
+                    line = 1,
+                    column = 6
+                ),
+                GlslToken(
+                    type = GlslToken.Type.EOF,
+                    data = "(eof)",
+                    position = 6,
+                    line = 1,
+                    column = 7
+                ),
             )
         )
         Truth.assertThat(GlslTokenizer.tokenize("int x;")).isEqualTo(
             listOf(
-                GlslToken(type = GlslToken.Type.KEYWORD, data = "int", position = 0, line = 1, column = 3),
+                GlslToken(
+                    type = GlslToken.Type.KEYWORD,
+                    data = "int",
+                    position = 0,
+                    line = 1,
+                    column = 3
+                ),
                 GlslToken(
                     type = GlslToken.Type.WHITESPACE,
                     data = " ",
@@ -120,9 +188,44 @@ class TokenizerTest {
                     line = 1,
                     column = 4
                 ),
-                GlslToken(type = GlslToken.Type.IDENTIFIER, data = "x", position = 4, line = 1, column = 5),
-                GlslToken(type = GlslToken.Type.OPERATOR, data = ";", position = 5, line = 1, column = 5),
-                GlslToken(type = GlslToken.Type.EOF, data = "(eof)", position = 5, line = 1, column = 6),
+                GlslToken(
+                    type = GlslToken.Type.IDENTIFIER,
+                    data = "x",
+                    position = 4,
+                    line = 1,
+                    column = 5
+                ),
+                GlslToken(
+                    type = GlslToken.Type.OPERATOR,
+                    data = ";",
+                    position = 5,
+                    line = 1,
+                    column = 5
+                ),
+                GlslToken(
+                    type = GlslToken.Type.EOF,
+                    data = "(eof)",
+                    position = 5,
+                    line = 1,
+                    column = 6
+                ),
+            )
+        )
+    }
+
+    @Test
+    fun block_comment() {
+        val result = GlslTokenizer.tokenize(blockComment)
+        println(result.toString())
+        Truth.assertThat(GlslTokenizer.tokenize(blockComment)).isEqualTo(
+            listOf(
+                GlslToken(
+                    type = GlslToken.Type.BLOCK_COMMENT,
+                    data = "/*\nblock comment1\nlock comment2\n*/",
+                    position = 0,
+                    line = 4,
+                    column = 1
+                )
             )
         )
     }
