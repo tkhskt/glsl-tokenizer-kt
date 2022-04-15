@@ -221,7 +221,7 @@ class TokenizerTest {
             listOf(
                 GlslToken(
                     type = GlslToken.Type.BLOCK_COMMENT,
-                    data = "/*\nblock comment1\nlock comment2\n*/",
+                    data = "/*\nblock comment1\nblock comment2\n*/",
                     position = 0,
                     line = 4,
                     column = 1
