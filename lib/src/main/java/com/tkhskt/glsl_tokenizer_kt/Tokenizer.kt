@@ -4,7 +4,7 @@ import com.tkhskt.glsl_tokenizer_kt.Operators.operators
 
 object GlslTokenizer {
 
-    fun tokenize(data: String, version: Version = Version.ES10): List<Token> {
+    fun tokenize(data: String, version: Version = Version.ES10): List<GlslToken> {
         val tokenizer = TokenizerInternal(version)
         return tokenizer.tokenize(data)
     }
@@ -30,7 +30,7 @@ object GlslTokenizer {
 
         private val content = mutableListOf<String>()
 
-        private val tokens = mutableListOf<Token>()
+        private val tokens = mutableListOf<GlslToken>()
 
         private val literals = if (version == Version.ES10) {
             Literals.literals
@@ -44,7 +44,7 @@ object GlslTokenizer {
             BuiltIns.builtIns300
         }
 
-        fun tokenize(data: String): List<Token> {
+        fun tokenize(data: String): List<GlslToken> {
             val charArray = data.replace("\r\n", "\n").toCharArray()
             var lastIndex: Int
             while (targetCharacterIndex < charArray.size) {
@@ -92,7 +92,7 @@ object GlslTokenizer {
             val tokenType = mode.tokenType ?: return
             if (data.isNotEmpty()) {
                 tokens.add(
-                    Token(
+                    GlslToken(
                         type = tokenType,
                         data = data,
                         position = start,
@@ -347,21 +347,21 @@ object GlslTokenizer {
             } while (true)
         }
 
-        private enum class Mode(val tokenType: Token.Type?) {
+        private enum class Mode(val tokenType: GlslToken.Type?) {
             NORMAL(null),
             TOKEN(null),
-            BLOCK_COMMENT(Token.Type.BLOCK_COMMENT),
-            PREPROCESSOR(Token.Type.PREPROCESSOR),
-            LINE_COMMENT(Token.Type.LINE_COMMENT),
-            OPERATOR(Token.Type.OPERATOR),
-            INTEGER(Token.Type.INTEGER),
-            FLOAT(Token.Type.FLOAT),
-            IDENTIFIER(Token.Type.IDENTIFIER),
-            BUILT_IN(Token.Type.BUILT_IN),
-            KEYWORD(Token.Type.KEYWORD),
-            WHITESPACE(Token.Type.WHITESPACE),
-            EOF(Token.Type.EOF),
-            HEX(Token.Type.INTEGER),
+            BLOCK_COMMENT(GlslToken.Type.BLOCK_COMMENT),
+            PREPROCESSOR(GlslToken.Type.PREPROCESSOR),
+            LINE_COMMENT(GlslToken.Type.LINE_COMMENT),
+            OPERATOR(GlslToken.Type.OPERATOR),
+            INTEGER(GlslToken.Type.INTEGER),
+            FLOAT(GlslToken.Type.FLOAT),
+            IDENTIFIER(GlslToken.Type.IDENTIFIER),
+            BUILT_IN(GlslToken.Type.BUILT_IN),
+            KEYWORD(GlslToken.Type.KEYWORD),
+            WHITESPACE(GlslToken.Type.WHITESPACE),
+            EOF(GlslToken.Type.EOF),
+            HEX(GlslToken.Type.INTEGER),
         }
     }
 }

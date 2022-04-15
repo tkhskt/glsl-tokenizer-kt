@@ -1,6 +1,6 @@
 package com.tkhskt.glsl_tokenizer_kt
 
-data class Token(
+data class GlslToken(
     val type: Type,
     val data: String,
     val position: Int,
