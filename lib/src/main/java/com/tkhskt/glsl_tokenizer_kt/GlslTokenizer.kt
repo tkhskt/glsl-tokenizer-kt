@@ -15,21 +15,19 @@ object GlslTokenizer {
     }
 
     private class TokenizerInternal(version: Version = Version.ES10) {
+
         private var total = 0
         private var mode: Mode = Mode.NORMAL
-
         private var lastCharacter = ""
         private var line = 1
         private var col = 0
         private var start = 0
         private var isNumber = false
         private var isOperator = false
-
         private var currentCharacter = ""
         private var targetCharacterIndex = 0
 
         private val content = mutableListOf<String>()
-
         private val tokens = mutableListOf<GlslToken>()
 
         private val literals = if (version == Version.ES10) {
