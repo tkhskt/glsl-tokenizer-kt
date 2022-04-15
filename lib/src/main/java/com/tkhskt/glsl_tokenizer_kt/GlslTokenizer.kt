@@ -41,7 +41,7 @@ object GlslTokenizer {
         private val builtIns = if (version == Version.ES10) {
             BuiltIns.builtIns
         } else {
-            BuiltIns.builtIns300
+            BuiltIns.builtIns30
         }
 
         fun tokenize(data: String): List<GlslToken> {

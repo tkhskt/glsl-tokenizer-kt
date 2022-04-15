@@ -151,7 +151,7 @@ internal object BuiltIns {
         "textureCubeGradEXT",
     )
 
-    val builtIns300 = builtIns.filterNot {
+    val builtIns30 = builtIns.filterNot {
         """^(gl_|texture)""".toRegex().containsMatchIn(it)
     } + listOf(
         "gl_VertexID",
