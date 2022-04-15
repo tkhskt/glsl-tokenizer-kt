@@ -8,7 +8,12 @@ data class GlslToken(
     val column: Int,
 ) {
 
-    val meta = listOf<Meta>()
+    private val _meta = mutableListOf<Meta>()
+    val meta: List<Meta> get() = _meta
+
+    fun addMetaData(metaData: Meta) {
+        _meta.add(metaData)
+    }
 
     enum class Type {
         BLOCK_COMMENT,

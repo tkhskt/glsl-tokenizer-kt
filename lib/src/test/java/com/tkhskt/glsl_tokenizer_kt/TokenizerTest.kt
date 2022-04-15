@@ -216,8 +216,7 @@ class TokenizerTest {
     @Test
     fun block_comment() {
         val result = GlslTokenizer.tokenize(blockComment)
-        println(result.toString())
-        Truth.assertThat(GlslTokenizer.tokenize(blockComment)).isEqualTo(
+        Truth.assertThat(result).isEqualTo(
             listOf(
                 GlslToken(
                     type = GlslToken.Type.BLOCK_COMMENT,
