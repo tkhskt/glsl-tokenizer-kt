@@ -20,7 +20,7 @@ data class Token(
         IDENTIFIER,
         BUILT_IN,
         KEYWORD,
-        WHITE_SPACE,
+        WHITESPACE,
         EOF;
     }
 

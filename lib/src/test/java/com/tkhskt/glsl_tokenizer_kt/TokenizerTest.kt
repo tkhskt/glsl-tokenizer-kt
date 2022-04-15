@@ -105,7 +105,7 @@ class TokenizerTest {
             listOf(
                 Token(type = Token.Type.KEYWORD, data = "uint", position = 0, line = 1, column = 4),
                 Token(
-                    type = Token.Type.WHITE_SPACE,
+                    type = Token.Type.WHITESPACE,
                     data = " ",
                     position = 4,
                     line = 1,
@@ -120,7 +120,7 @@ class TokenizerTest {
             listOf(
                 Token(type = Token.Type.KEYWORD, data = "int", position = 0, line = 1, column = 3),
                 Token(
-                    type = Token.Type.WHITE_SPACE,
+                    type = Token.Type.WHITESPACE,
                     data = " ",
                     position = 3,
                     line = 1,

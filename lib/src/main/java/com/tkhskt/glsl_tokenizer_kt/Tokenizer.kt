@@ -81,7 +81,7 @@ object GlslTokenizer {
                 Mode.OPERATOR -> operator()
                 Mode.INTEGER -> integer()
                 Mode.FLOAT -> decimal()
-                Mode.WHITE_SPACE -> whiteSpace()
+                Mode.WHITESPACE -> whiteSpace()
                 Mode.HEX -> hex()
                 Mode.TOKEN -> readToken()
                 else -> targetCharacterIndex
@@ -127,7 +127,7 @@ object GlslTokenizer {
             }
 
             if ("""\s""".toRegex().containsMatchIn(currentCharacter)) {
-                mode = Mode.WHITE_SPACE
+                mode = Mode.WHITESPACE
                 start = total + targetCharacterIndex
                 return targetCharacterIndex
             }
@@ -359,7 +359,7 @@ object GlslTokenizer {
             IDENTIFIER(Token.Type.IDENTIFIER),
             BUILT_IN(Token.Type.BUILT_IN),
             KEYWORD(Token.Type.KEYWORD),
-            WHITE_SPACE(Token.Type.WHITE_SPACE),
+            WHITESPACE(Token.Type.WHITESPACE),
             EOF(Token.Type.EOF),
             HEX(Token.Type.INTEGER),
         }
