@@ -225,7 +225,8 @@ class TokenizerTest {
                     position = 0,
                     line = 4,
                     column = 1
-                )
+                ),
+                GlslToken(type= GlslToken.Type.EOF, data="(eof)", position=0, line=4, column=2),
             )
         )
     }
