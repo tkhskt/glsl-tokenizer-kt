@@ -14,7 +14,7 @@ object GlslTokenizer {
         ES30,
     }
 
-    private class TokenizerInternal(version: Version = Version.ES10) {
+    private class TokenizerInternal(version: Version) {
 
         private var total = 0
         private var mode: Mode = Mode.NORMAL
