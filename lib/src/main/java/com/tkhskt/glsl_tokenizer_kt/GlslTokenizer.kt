@@ -4,6 +4,8 @@ import com.tkhskt.glsl_tokenizer_kt.Operators.operators
 
 object GlslTokenizer {
 
+    @JvmStatic
+    @JvmOverloads
     fun tokenize(data: String, version: Version = Version.ES10): List<GlslToken> {
         val tokenizer = TokenizerInternal(version)
         return tokenizer.tokenize(data)
@@ -321,8 +323,8 @@ object GlslTokenizer {
 
         private fun determineOperator(buf: List<String>): Boolean {
             var j = 0
-            var idx = 0
-            var res = ""
+            var idx: Int
+            var res: String
 
             do {
                 idx = operators.indexOf(buf.slice(0 until buf.size + j).joinToString(""))
