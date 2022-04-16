@@ -43,9 +43,12 @@ data class GlslToken(
 ### Options
 
 By default, the token is obtained as GLSL ES 1.0.
+
 You can obtain tokens from a string written in GLSL ES 3.0 by passing `GlslTokenizer.Version.ES30` as the second argument of the tokenize method.
 
-`GlslTokenizer.tokenize(glslString, GlslTokenizer.Version.ES30)`
+```kotlin
+GlslTokenizer.tokenize(glslString, GlslTokenizer.Version.ES30)
+```
 
 ### Token Type
 
