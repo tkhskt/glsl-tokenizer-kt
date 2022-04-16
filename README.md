@@ -64,3 +64,7 @@ KEYWORD
 WHITESPACE
 EOF
 ```
+
+## License
+
+MIT
