@@ -73,12 +73,12 @@ object GlslTokenizer {
         private fun processCharacter() {
             targetCharacterIndex = when (mode) {
                 Mode.NORMAL -> normal()
+                Mode.INTEGER -> integer()
+                Mode.FLOAT -> decimal()
                 Mode.BLOCK_COMMENT -> blockComment()
                 Mode.LINE_COMMENT -> lineComment()
                 Mode.PREPROCESSOR -> preprocessor()
                 Mode.OPERATOR -> operator()
-                Mode.INTEGER -> integer()
-                Mode.FLOAT -> decimal()
                 Mode.WHITESPACE -> whiteSpace()
                 Mode.HEX -> hex()
                 Mode.TOKEN -> readToken()
@@ -348,18 +348,18 @@ object GlslTokenizer {
         private enum class Mode(val tokenType: GlslToken.Type?) {
             NORMAL(null),
             TOKEN(null),
-            BLOCK_COMMENT(GlslToken.Type.BLOCK_COMMENT),
-            PREPROCESSOR(GlslToken.Type.PREPROCESSOR),
-            LINE_COMMENT(GlslToken.Type.LINE_COMMENT),
-            OPERATOR(GlslToken.Type.OPERATOR),
             INTEGER(GlslToken.Type.INTEGER),
             FLOAT(GlslToken.Type.FLOAT),
+            BLOCK_COMMENT(GlslToken.Type.BLOCK_COMMENT),
+            LINE_COMMENT(GlslToken.Type.LINE_COMMENT),
+            PREPROCESSOR(GlslToken.Type.PREPROCESSOR),
+            OPERATOR(GlslToken.Type.OPERATOR),
+            WHITESPACE(GlslToken.Type.WHITESPACE),
+            HEX(GlslToken.Type.INTEGER),
             IDENTIFIER(GlslToken.Type.IDENTIFIER),
             BUILT_IN(GlslToken.Type.BUILT_IN),
             KEYWORD(GlslToken.Type.KEYWORD),
-            WHITESPACE(GlslToken.Type.WHITESPACE),
             EOF(GlslToken.Type.EOF),
-            HEX(GlslToken.Type.INTEGER),
         }
     }
 }
