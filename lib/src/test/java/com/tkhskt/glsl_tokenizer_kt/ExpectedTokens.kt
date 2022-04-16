@@ -1,6 +1,6 @@
 package com.tkhskt.glsl_tokenizer_kt
 
-val expectedTokens = listOf(
+internal val expectedTokens = listOf(
     GlslToken(column = 0, data = "\n", line = 2, position = 0, type = GlslToken.Type.WHITESPACE),
     GlslToken(column = 9, data = "precision", line = 2, position = 1, type = GlslToken.Type.KEYWORD),
     GlslToken(column = 10, data = " ", line = 2, position = 10, type = GlslToken.Type.WHITESPACE),

@@ -6,7 +6,7 @@ import java.io.File
 import kotlin.io.path.Path
 
 
-class TokenizerTest {
+internal class TokenizerTest {
 
     private val testResourcesPath =
         Path("src/test/java/com/tkhskt/glsl_tokenizer_kt/resources").toAbsolutePath().toString()
