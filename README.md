@@ -1,4 +1,4 @@
-# glsl-tokenizer-kt [![](https://jitpack.io/v/com.tkhskt/glsl-tokenizer-kt.svg)](https://jitpack.io/#com.tkhskt/glsl-tokenizer-kt)
+# glsl-tokenizer-kt [![](https://jitpack.io/v/com.tkhskt/glsl-tokenizer-kt.svg)](https://jitpack.io/#com.tkhskt/glsl-tokenizer-kt) ![CI](https://github.com/tkhskt/glsl-tokenizer-kt/actions/workflows/tokenizer-test.yml/badge.svg)
 
 Kotlin implementation of [glslify/glsl-tokenizer](https://github.com/glslify/glsl-tokenizer)
 
