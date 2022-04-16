@@ -13,4 +13,4 @@ dependencyResolutionManagement {
     }
 }
 rootProject.name = "kotlin-glsl-tokenizer"
-include ':lib'
+include(":lib")
